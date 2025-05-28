@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Meetings - Zafike Royal Hotel</title>
+    <style>/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 85, 50, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: var(--forest-green);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--golden-yellow);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: var(--transition);
+        }
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: var(--golden-yellow);
+        }
+         .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--golden-yellow);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--golden-yellow);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url(image/meetinghall.jpeg);
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 80px;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.4rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.cta-button {
+    background: linear-gradient(135deg, rgb(39, 72, 39),rgb(39, 72, 39));
+    color: white;
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgb(39, 72, 39);
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, rgb(39, 72, 39),rgb(39, 72, 39));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgb(39, 72, 39);
+}
+
+/* Venues Section */
+.venues-section {
+    padding: 5rem 0;
+    background-color: #fff;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+    position: relative;
+    font-weight: 700;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, rgb(39, 72, 39), rgb(39, 72, 39));
+    border-radius: 2px;
+}
+
+.venues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.venue-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.venue-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.venue-image {
+    height: 250px;
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    background-image: url(image/Banner.webp);
+    position: relative;
+    overflow: hidden;
+}
+.venue-image1 {
+    height: 250px;
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    background-image: url(image/room.JPG);
+    position: relative;
+    overflow: hidden;
+}
+.venue-image2 {
+    height: 250px;
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    background-image: url();
+    position: relative;
+    overflow: hidden;
+}
+.venue-image3 {
+    height: 250px;
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    background-image: url();
+    position: relative;
+    overflow: hidden;
+}
+.venue-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url();
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.venue-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.venue-card:hover .venue-overlay {
+    opacity: 1;
+}
+
+.view-details-btn {
+    background: rgba(255,255,255,0.9);
+    color: rgb(39, 72, 39);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-details-btn:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+.venue-info {
+    padding: 2rem;
+}
+
+.venue-info h3 {
+    font-size: 1.6rem;
+    color: rgb(39, 72, 39);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.venue-specs {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.spec {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.venue-info p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.venue-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.feature-tag {
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Services Section */
+.services-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, black, rgb(39, 72, 39));
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.service-item {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.service-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.service-item h3 {
+    font-size: 1.4rem;
+    color: black;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.service-item p {
+    color: black;
+    line-height: 1.6;
+}
+
+/* Pricing Section */
+.pricing-section {
+    padding: 5rem 0;
+    background-color: #fff;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.pricing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.pricing-card.basic {
+    border-color: #95a5a6;
+}
+
+.pricing-card.premium {
+    border-color: rgb(39, 72, 39);
+    transform: scale(1.05);
+}
+
+.pricing-card.luxury {
+    border-color: rgb(39, 72, 39);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.pricing-card h3 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(39, 72, 39);
+    margin-bottom: 0.5rem;
+}
+
+.price-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.package-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.package-features li {
+    padding: 0.5rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.package-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.package-btn {
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.package-btn:hover {
+    background: linear-gradient(135deg, rgb(39, 72, 39), rgb(39, 72, 39));
+    transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 3% auto;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    animation: modalSlideIn 0.4s ease;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+
+.close:hover {
+    color: #e74c3c;
+}
+
+/* Inquiry Form */
+.inquiry-form h3 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+.inquiry-form input:focus,
+.inquiry-form select:focus,
+.inquiry-form textarea:focus {
+    outline: none;
+    border-color: #e67e22;
+    box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
+}
+
+.inquiry-form textarea {
+    grid-column: 1 / -1;
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #d35400, #e67e22);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
+}
+
+/* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--golden-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--forest-green);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--golden-yellow);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-menu {
+        gap: 1rem;
+    }
+    
+    .hero {
+        height: 50vh;
+        margin-top: 120px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+    
+    .venues-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pricing-card.premium {
+        transform: none;
+    }
+    
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        padding: 2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .venue-card {
+        margin: 0 1rem;
+    }
+    
+    .venue-info {
+        padding: 1.5rem;
+    }
+    
+    .service-item {
+        padding: 2rem 1.5rem;
+    }
+    
+    .pricing-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+       <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Zafike Royal</a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="room.html">Rooms & Suites</a></li>
+                <li><a href="amneitites.html">Amenities</a></li>
+                <li><a href="Meeting.html">Meetings & Events</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Events & Meetings</h1>
+                <p>Create unforgettable moments in our world-class venues</p>
+                <button class="cta-button" id="inquiryBtn">Request Quote</button>
+            </div>
+        </section>
+
+        <section class="venues-section">
+            <div class="container">
+                <h2 class="section-title">Our Event Venues</h2>
+                
+                <div class="venues-grid">
+                    <div class="venue-card" data-venue="ballroom">
+                        <div class="venue-image">
+                            <div class="venue-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="venue-info">
+                            <h3>Grand Ballroom</h3>
+                            <div class="venue-specs">
+                                <span class="spec"><strong>Capacity:</strong> 500 guests</span>
+                                <span class="spec"><strong>Size:</strong> 5,000 sq ft</span>
+                            </div>
+                            <p>Elegant ballroom perfect for weddings, galas, and large corporate events</p>
+                            <div class="venue-features">
+                                <span class="feature-tag">Crystal Chandeliers</span>
+                                <span class="feature-tag">Dance Floor</span>
+                                <span class="feature-tag">Stage Area</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="venue-card" data-venue="boardroom">
+                        <div class="venue-image1">
+                            <div class="venue-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="venue-info">
+                            <h3>Executive Boardroom</h3>
+                            <div class="venue-specs">
+                                <span class="spec"><strong>Capacity:</strong> 24 guests</span>
+                                <span class="spec"><strong>Size:</strong> 600 sq ft</span>
+                            </div>
+                            <p>Professional boardroom for executive meetings and confidential discussions</p>
+                            <div class="venue-features">
+                                <span class="feature-tag">Video Conferencing</span>
+                                <span class="feature-tag">Leather Seating</span>
+                                <span class="feature-tag">Privacy Glass</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="venue-card" data-venue="conference">
+                        <div class="venue-image2">
+                            <div class="venue-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="venue-info">
+                            <h3>Conference Center</h3>
+                            <div class="venue-specs">
+                                <span class="spec"><strong>Capacity:</strong> 200 guests</span>
+                                <span class="spec"><strong>Size:</strong> 2,500 sq ft</span>
+                            </div>
+                            <p>Modern conference space ideal for seminars, presentations, and training sessions</p>
+                            <div class="venue-features">
+                                <span class="feature-tag">Theater Seating</span>
+                                <span class="feature-tag">Projection System</span>
+                                <span class="feature-tag">Live Streaming</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="venue-card" data-venue="terrace">
+                        <div class="venue-image3">
+                            <div class="venue-overlay">
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                        </div>
+                        <div class="venue-info">
+                            <h3>Rooftop Terrace</h3>
+                            <div class="venue-specs">
+                                <span class="spec"><strong>Capacity:</strong> 150 guests</span>
+                                <span class="spec"><strong>Size:</strong> 3,000 sq ft</span>
+                            </div>
+                            <p>Stunning outdoor venue with panoramic city views for cocktail parties and receptions</p>
+                            <div class="venue-features">
+                                <span class="feature-tag">City Views</span>
+                                <span class="feature-tag">Weather Protection</span>
+                                <span class="feature-tag">Bar Service</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="container">
+                <h2 class="section-title">Event Services</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3>Event Planning</h3>
+                        <p>Dedicated event coordinators to manage every detail</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3>Catering Services</h3>
+                        <p>Gourmet menus crafted by our award-winning chefs</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>A/V Technology</h3>
+                        <p>State-of-the-art audio-visual equipment and support</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3>Setup & Décor</h3>
+                        <p>Professional setup and decoration services</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing-section">
+            <div class="container">
+                <h2 class="section-title">Event Packages</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card basic">
+                        <h3>Essential Package</h3>
+                        <div class="price">$2,500</div>
+                        <div class="price-subtitle">Half Day Event</div>
+                        <ul class="package-features">
+                            <li>Venue rental (4 hours)</li>
+                            <li>Basic A/V equipment</li>
+                            <li>Event coordinator</li>
+                            <li>Coffee & tea service</li>
+                            <li>Basic setup & cleanup</li>
+                        </ul>
+                        <button class="package-btn">Select Package</button>
+                    </div>
+
+                    <div class="pricing-card premium">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Professional Package</h3>
+                        <div class="price">$4,800</div>
+                        <div class="price-subtitle">Full Day Event</div>
+                        <ul class="package-features">
+                            <li>Venue rental (8 hours)</li>
+                            <li>Premium A/V equipment</li>
+                            <li>Dedicated event manager</li>
+                            <li>Lunch & refreshments</li>
+                            <li>Professional setup & décor</li>
+                            <li>Photography service</li>
+                        </ul>
+                        <button class="package-btn">Select Package</button>
+                    </div>
+
+                    <div class="pricing-card luxury">
+                        <h3>Luxury Package</h3>
+                        <div class="price">$8,500</div>
+                        <div class="price-subtitle">Premium Experience</div>
+                        <ul class="package-features">
+                            <li>Full venue access (12 hours)</li>
+                            <li>Complete A/V suite</li>
+                            <li>Personal event concierge</li>
+                            <li>Gourmet catering</li>
+                            <li>Custom décor & flowers</li>
+                            <li>Professional photography</li>
+                            <li>Live entertainment options</li>
+                        </ul>
+                        <button class="package-btn">Select Package</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Venue Details Modal -->
+        <div id="venueModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="venueModalBody">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Inquiry Form Modal -->
+        <div id="inquiryModal" class="modal">
+            <div class="modal-content">
+                <span class="close inquiry-close">&times;</span>
+                <div class="inquiry-form">
+                    <h3>Event Inquiry</h3>
+                    <form id="eventInquiryForm">
+                        <div class="form-row">
+                            <input type="text" id="clientName" placeholder="Your Name" required>
+                            <input type="email" id="clientEmail" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="tel" id="clientPhone" placeholder="Phone Number">
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-row">
+                            <select id="eventType" required>
+                                <option value="">Select Event Type</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="corporate">Corporate Event</option>
+                                <option value="conference">Conference</option>
+                                <option value="party">Private Party</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <input type="number" id="guestCount" placeholder="Number of Guests" min="1" required>
+                        </div>
+                        <textarea id="eventDetails" placeholder="Tell us about your event requirements..." rows="4"></textarea>
+                        <button type="submit" class="submit-btn">Send Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zafike Royal Hotel</h3>
+                    <p>Experience luxury redefined. Your comfort and satisfaction are our highest priorities, and we strive to create memorable experiences for every guest.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#rooms">Rooms & Suites</a></p>
+                    <p><a href="#amenities">Amenities</a></p>
+                    <p><a href="#Meeting">Meetings & Event</a></p>
+                    <p><a href="#gallery">Gallery</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> reservations@zafikeroyal.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Royal Avenue, Luxury District</p>
+                    <p>City, State 12345</p>
+                </div>
+
+    
+
+    </footer>
+
+    <script>// Venue data with detailed information
+const venueData = {
+    ballroom: {
+        title: "Grand Ballroom",
+        capacity: "500 guests",
+        size: "5,000 sq ft",
+        description: "Our magnificent Grand Ballroom is the epitome of elegance and sophistication, perfect for creating unforgettable memories.",
+        features: [
+            "Crystal chandeliers with dimming controls",
+            "Hardwood dance floor (20x20 ft)",
+            "Elevated stage area with professional lighting",
+            "Built-in sound system with wireless microphones",
+            "Bridal suite and groom's room",
+            "Multiple entrance points for grand arrivals",
+            "Climate control system",
+            "Professional photography backdrop areas"
+        ],
+        amenities: [
+            "Complimentary bridal suite for 4 hours",
+            "Dedicated event coordinator",
+            "Valet parking service",
+            "Coat check service",
+            "24-hour security",
+            "Accessible facilities"
+        ],
+        pricing: "$8,000 - $15,000 depending on day and season",
+        availability: "Available for full-day events, minimum 6-hour rental"
+    },
+    boardroom: {
+        title: "Executive Boardroom",
+        capacity: "24 guests",
+        size: "600 sq ft",
+        description: "A prestigious boardroom designed for high-level executive meetings and confidential business discussions.",
+        features: [
+            "Premium leather executive chairs",
+            "Solid mahogany conference table",
+            "Smart glass privacy walls",
+            "4K video conferencing system",
+            "Interactive whiteboard technology",
+            "Individual power outlets and USB ports",
+            "Climate control with individual zones",
+            "Professional lighting with adjustable settings"
+        ],
+        amenities: [
+            "High-speed fiber internet",
+            "Printing and scanning services",
+            "Coffee and tea service",
+            "Administrative support",
+            "Secure document storage",
+            "Catering coordination"
+        ],
+        pricing: "$500 - $800 per day",
+        availability: "Available 24/7 with advance booking"
+    },
+    conference: {
+        title: "Conference Center",
+        capacity: "200 guests",
+        size: "2,500 sq ft",
+        description: "Modern conference facility equipped with the latest technology for presentations, seminars, and training sessions.",
+        features: [
+            "Theater-style seating with writing surfaces",
+            "4K laser projection system (20ft screen)",
+            "Professional audio system with lapel mics",
+            "Live streaming capabilities",
+            "Multiple camera angles for recording",
+            "Interactive presentation tools",
+            "Separate breakout rooms",
+            "Registration and reception area"
+        ],
+        amenities: [
+            "Technical support team",
+            "Registration desk setup",
+            "Name badge printing",
+            "Simultaneous interpretation equipment",
+            "Recording services",
+            "Catering preparation area"
+        ],
+        pricing: "$2,500 - $4,000 per day",
+        availability: "Available Monday-Sunday, 6 AM - 11 PM"
+    },
+    terrace: {
+        title: "Rooftop Terrace",
+        capacity: "150 guests",
+        size: "3,000 sq ft",
+        description: "Stunning outdoor venue with panoramic city views, perfect for cocktail receptions and networking events.",
+        features: [
+            "360-degree city skyline views",
+            "Retractable weather protection canopy",
+            "Outdoor bar and serving stations",
+            "Ambient lighting and string lights",
+            "Portable dance floor options",
+            "Sound system with weather protection",
+            "Heating elements for cooler evenings",
+            "Garden area with decorative plants"
+        ],
+        amenities: [
+            "Professional bartending service",
+            "Cocktail reception setup",
+            "Photography lighting assistance",
+            "Weather monitoring service",
+            "Emergency indoor backup venue",
+            "Restroom facilities nearby"
+        ],
+        pricing: "$3,000 - $5,500 per event",
+        availability: "Seasonal availability (April-October), events until 10 PM"
+    }
+};
+
+// DOM elements
+const venueModal = document.getElementById('venueModal');
+const venueModalBody = document.getElementById('venueModalBody');
+const inquiryModal = document.getElementById('inquiryModal');
+const inquiryBtn = document.getElementById('inquiryBtn');
+const eventInquiryForm = document.getElementById('eventInquiryForm');
+
+// Initialize event listeners when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event listeners to venue cards and view details buttons
+    document.querySelectorAll('.venue-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const venueType = this.dataset.venue;
+            showVenueModal(venueType);
+        });
+    });
+
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const card = this.closest('.venue-card');
+            const venueType = card.dataset.venue;
+            showVenueModal(venueType);
+        });
+    });
+
+    // Inquiry button event listener
+    inquiryBtn.addEventListener('click', function() {
+        showInquiryModal();
+    });
+
+    // Package buttons event listeners
+    document.querySelectorAll('.package-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const packageCard = this.closest('.pricing-card');
+            const packageName = packageCard.querySelector('h3').textContent;
+            showInquiryModal(packageName);
+        });
+    });
+
+    // Close modal event listeners
+    document.querySelectorAll('.close').forEach(closeBtn => {
+        closeBtn.addEventListener('click', function() {
+            closeModals();
+        });
+    });
+
+    // Click outside modal to close
+    window.addEventListener('click', function(e) {
+        if (e.target === venueModal || e.target === inquiryModal) {
+            closeModals();
+        }
+    });
+
+    // Escape key to close modals
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModals();
+        }
+    });
+
+    // Form submission
+    eventInquiryForm.addEventListener('submit', handleFormSubmission);
+
+    // Add smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add scroll effects
+    initializeScrollEffects();
+    
+    // Add navbar scroll effect
+    initializeNavbarEffects();
+});
+
+// Show venue details modal
+function showVenueModal(venueType) {
+    const venue = venueData[venueType];
+    
+    if (!venue) {
+        console.error('Venue data not found for:', venueType);
+        return;
+    }
+
+    // Create modal content
+    const featuresList = venue.features.map(feature => `<li>${feature}</li>`).join('');
+    const amenitiesList = venue.amenities.map(amenity => `<li>${amenity}</li>`).join('');
+    
+    venueModalBody.innerHTML = `
+        <div class="venue-modal-header">
+            <h2>${venue.title}</h2>
+            <div class="venue-quick-specs">
+                <span class="spec-item"><strong>Capacity:</strong> ${venue.capacity}</span>
+                <span class="spec-item"><strong>Size:</strong> ${venue.size}</span>
+            </div>
+        </div>
+        
+        <div class="venue-modal-content">
+            <p class="venue-description">${venue.description}</p>
+            
+            <div class="modal-section">
+                <h4>Features & Equipment</h4>
+                <ul class="feature-list">${featuresList}</ul>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Included Amenities</h4>
+                <ul class="amenity-list">${amenitiesList}</ul>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="pricing-info">
+                    <strong>Pricing:</strong> ${venue.pricing}
+                </div>
+                <div class="availability-info">
+                    <strong>Availability:</strong> ${venue.availability}
+                </div>
+                <button class="book-venue-btn" onclick="showInquiryModal('${venue.title}')">
+                    Book This Venue
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Add modal-specific styles
+    addModalStyles();
+
+    // Show modal
+    venueModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        venueModal.style.opacity = '1';
+    }, 10);
+}
+
+// Show inquiry modal
+function showInquiryModal(preselectedPackage = '') {
+    // Pre-fill package selection if provided
+    if (preselectedPackage) {
+        const eventTypeSelect = document.getElementById('eventType');
+        if (preselectedPackage.toLowerCase().includes('ballroom')) {
+            eventTypeSelect.value = 'wedding';
+        } else if (preselectedPackage.toLowerCase().includes('boardroom')) {
+            eventTypeSelect.value = 'corporate';
+        } else if (preselectedPackage.toLowerCase().includes('conference')) {
+            eventTypeSelect.value = 'conference';
+        }
+        
+        // Add a note about the preselected venue/package
+        const eventDetails = document.getElementById('eventDetails');
+        eventDetails.value = `Interested in: ${preselectedPackage}\n\n`;
+    }
+
+    inquiryModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        inquiryModal.style.opacity = '1';
+    }, 10);
+}
+
+// Close all modals
+function closeModals() {
+    venueModal.style.opacity = '0';
+    inquiryModal.style.opacity = '0';
+    document.body.style.overflow = 'auto';
+    
+    setTimeout(() => {
+        venueModal.style.display = 'none';
+        inquiryModal.style.display = 'none';
+    }, 300);
+}
+
+// Handle form submission
+function handleFormSubmission(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(eventInquiryForm);
+    const formObject = {};
+    
+    // Convert FormData to object
+    for (let [key, value] of formData.entries()) {
+        formObject[key] = value;
+    }
+
+    // Simulate form submission
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        // Show success message
+        showSuccessMessage();
+        
+        // Reset form
+        eventInquiryForm.reset();
+        
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        // Close modal after a delay
+        setTimeout(() => {
+            closeModals();
+        }, 2000);
+    }, 1500);
+}
+
+// Show success message
+function showSuccessMessage() {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerHTML = `
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h3>Inquiry Sent Successfully!</h3>
+            <p>Thank you for your interest. Our events team will contact you within 24 hours.</p>
+        </div>
+    `;
+    
+    document.body.appendChild(successMessage);
+    
+    // Style the success message
+    successMessage.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    const successContent = successMessage.querySelector('.success-content');
+    successContent.style.cssText = `
+        background: white;
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        animation: slideUp 0.3s ease;
+    `;
+    
+    const successIcon = successMessage.querySelector('.success-icon');
+    successIcon.style.cssText = `
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        color: white;
+        font-weight: bold;
+    `;
+    
+    // Remove success message after 3 seconds
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000);
+}
+
+// Add modal-specific styles
+function addModalStyles() {
+    if (document.getElementById('modalStyles')) return;
+    
+    const styles = document.createElement('style');
+    styles.id = 'modalStyles';
+    styles.textContent = `
+        .venue-modal-header h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .venue-quick-specs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .spec-item {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        .venue-description {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+        
+        .modal-section h4 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 0.5rem;
+        }
+        
+        .feature-list, .amenity-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li, .amenity-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .feature-list li::before, .amenity-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        .modal-footer {
+            background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .pricing-info, .availability-info {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .book-venue-btn {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .book-venue-btn:hover {
+            background: linear-gradient(135deg, #d35400, #e67e22);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    
+    document.head.appendChild(styles);
+}
+
+
+
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Apply scroll animations to various elements
+    const animatedElements = [
+        ...document.querySelectorAll('.venue-card'),
+        ...document.querySelectorAll('.service-item'),
+        ...document.querySelectorAll('.pricing-card')
+    ];
+
+    animatedElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(element);
+    });
+
+
+// Initialize navbar effects
+function initializeNavbarEffects() {
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) {
+            navbar.style.background = 'linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.95))';
+            navbar.style.backdropFilter = 'blur(10px)';
+        } else {
+            navbar.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
+            navbar.style.backdropFilter = 'none';
+        }
+    });
+}
+
+// Add parallax effect to hero section
+window.addEventListener('scroll', () => {
+    const hero = document.querySelector('.hero');
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.3;
+    
+    if (hero) {
+        hero.style.transform = `translateY(${rate}px)`;
+    }
+});
+
+// Add loading states for interactive elements
+document.addEventListener('DOMContentLoaded', function() {
+    // Add hover effects to buttons
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            if (!this.disabled) {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
+            }
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            if (!this.disabled) {
+                this.style.transform = 'translateY(0) scale(1)';
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>
