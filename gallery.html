@@ -570,6 +570,186 @@
             box-shadow: var(--shadow-light);
         }
 
+         /* Footer */
+.footer {
+    background: var(--forest-green);
+    color: var(--white);
+    padding: 4rem 0 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo h3 {
+    color: var(--golden-yellow);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--light-gold);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: var(--golden-yellow);
+    color: var(--forest-green);
+    transform: translateY(-2px);
+}
+
+.footer-title {
+    color: var(--golden-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.footer-links a:hover,
+.footer-links a.active {
+    opacity: 1;
+    color: var(--golden-yellow);
+}
+
+.contact-info {
+    space-y: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.contact-item i {
+    color: var(--golden-yellow);
+    width: 16px;
+    margin-top: 2px;
+}
+
+.contact-item span {
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom-content p {
+    opacity: 0.8;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-bottom-links a {
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.footer-bottom-links a:hover {
+    opacity: 1;
+    color: var(--golden-yellow);
+}
+
+/* Footer Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-bottom-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 0 1rem;
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -590,12 +770,41 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
-                display: none;
-            }
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 100%;
+        background: var(--forest-green); /* or any background */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        gap: 2rem;
+        transition: right 0.3s ease;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+   /* Animate to "X" */
+.mobile-menu.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
 
             .mobile-menu {
                 display: flex;
             }
+
 
             .page-title {
                 font-size: 2.5rem;
@@ -652,6 +861,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="room.html">Rooms & Suites</a></li>
                 <li><a href="amneitites.html">Amenities</a></li>
+                <li><a href="Meeting.html" >Meetings & Events</a></li>
                 <li><a href="#" class="active">Gallery</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -876,47 +1086,109 @@
         </div>
     </div>
 
+
     <!-- Footer -->
-    <footer style="background: var(--forest-green); color: white; padding: 4rem 0 2rem; text-align: center;">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
-                <div>
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--golden-yellow); margin-bottom: 1rem;">Zafike Royal Hotel</h3>
-                    <p style="opacity: 0.9; line-height: 1.6;">Experience luxury and comfort in the heart of the city. Your royal treatment awaits.</p>
-                </div>
-                <div>
-                    <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Quick Links</h4>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <a href="index.html" style="color: white; text-decoration: none; opacity: 0.9; transition: var(--transition);">Home</a>
-                        <a href="rooms.html" style="color: white; text-decoration: none; opacity: 0.9; transition: var(--transition);">Rooms & Suites</a>
-                        <a href="amenities.html" style="color: white; text-decoration: none; opacity: 0.9; transition: var(--transition);">Amenities</a>
-                        <a href="about.html" style="color: white; text-decoration: none; opacity: 0.9; transition: var(--transition);">About Us</a>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Zafike Royal Hotel</h3>
+                        <p class="footer-tagline">Your Royal Experience Awaits</p>
+                    </div>
+                    <p class="footer-description">
+                        Experience luxury and elegance at Zafike Royal Hotel, where every guest is treated like royalty. Creating unforgettable memories since 1985.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div>
-                    <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Contact Info</h4>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem; opacity: 0.9;">
-                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                        <p><i class="fas fa-envelope"></i> info@zafikeroyal.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Royal Street, City Center</p>
-                    </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="room.html">Rooms & Suites</a></li>
+                        <li><a href="amneitites.html">Amenities</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#" class="active">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
                 </div>
-                <div>
-                    <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Follow Us</h4>
-                    <div style="display: flex; gap: 1rem; justify-content: center;">
-                        <a href="#" style="color: white; font-size: 1.5rem; transition: var(--transition);"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="color: white; font-size: 1.5rem; transition: var(--transition);"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: white; font-size: 1.5rem; transition: var(--transition);"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: white; font-size: 1.5rem; transition: var(--transition);"><i class="fab fa-linkedin"></i></a>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Room Service</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Fine Dining</a></li>
+                        <li><a href="#">Event Planning</a></li>
+                        <li><a href="#">Business Center</a></li>
+                        <li><a href="#">Concierge</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Royal Avenue<br>Downtown District, City 12345</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@zafikeroyal.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Front Desk Service</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 2rem; opacity: 0.7;">
-                <p>&copy; 2025 Zafike Royal Hotel. All rights reserved.</p>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Zafike Royal Hotel. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
+
+     <script>
+   const mobileMenu = document.querySelector('.mobile-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    // Toggle menu on hamburger click
+    mobileMenu.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+    });
+</script>
     <script>
         // Gallery data
         const galleryData = [
@@ -1063,10 +1335,10 @@
             alert('Virtual tour feature would be integrated here. This could link to a 360° tour service or custom implementation.');
         }
 
-        // Mobile menu toggle (if needed)
+   // Mobile menu toggle (basic implementation)
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         });
 
         // Intersection Observer for scroll animations
