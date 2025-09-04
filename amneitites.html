@@ -114,11 +114,43 @@
             transition: var(--transition);
         }
 
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--forest-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-dark);
+        }
         /* Page Header */
         .page-header {
             height: 60vh;
             background: linear-gradient(135deg, rgba(0, 85, 50, 0.8), rgba(207, 175, 83, 0.6)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23005532" width="1200" height="600"/><rect fill="%23CFAF53" width="800" height="300" x="200" y="150" opacity="0.2"/><circle fill="%23E8D084" cx="300" cy="200" r="60" opacity="0.3"/><rect fill="%23CFAF53" width="400" height="200" x="600" y="300" opacity="0.15"/></svg>');
+                        url(image/conciege.jpg);
             background-size: cover;
             background-position: center;
             display: flex;
@@ -257,9 +289,11 @@
             position: relative;
         }
 
-        .amenity-icon i {
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.9);
+        .amenity-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .amenity-content {
@@ -715,6 +749,91 @@
         .featured-card:nth-child(2) { animation-delay: 0.2s; }
         .featured-card:nth-child(3) { animation-delay: 0.3s; }
         .featured-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--golden-yellow);
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 90%;
+                max-width: none;
+            }
+
+            #caption {
+                width: 90%;
+                font-size: 1rem;
+            }
+
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -753,7 +872,7 @@
             <nav class="breadcrumb-nav">
                 <a href="index.html">Home</a>
                 <i class="fas fa-chevron-right"></i>
-                <span>Events & Meetings</span>
+                <span>Amenities</span>
             </nav>
         </div>
     </section>
@@ -769,7 +888,7 @@
             <div class="amenities-grid">
                 <div class="amenity-card fade-in">
                     <div class="amenity-icon">
-                        <i class="fas fa-wifi"></i>
+                        <img src="image/wifi.jpg" alt="WiFi">
                     </div>
                     <div class="amenity-content">
                         <h3 class="amenity-title">Complimentary Wi-Fi</h3>
@@ -785,7 +904,7 @@
 
                 <div class="amenity-card fade-in">
                     <div class="amenity-icon">
-                        <i class="fas fa-concierge-bell"></i>
+                        <img src="image/conciege.jpg" alt="Concierge">
                     </div>
                     <div class="amenity-content">
                         <h3 class="amenity-title">24-Hour Concierge</h3>
@@ -801,7 +920,7 @@
 
                 <div class="amenity-card fade-in">
                     <div class="amenity-icon">
-                        <i class="fas fa-utensils"></i>
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=200&fit=crop" alt="Restaurant">
                     </div>
                     <div class="amenity-content">
                         <h3 class="amenity-title">Fine Dining Restaurant</h3>
@@ -817,7 +936,7 @@
 
                 <div class="amenity-card fade-in">
                     <div class="amenity-icon">
-                        <i class="fas fa-swimming-pool"></i>
+                        <img src="image/pool.JPG" alt="Swimming Pool">
                     </div>
                     <div class="amenity-content">
                         <h3 class="amenity-title">Luxury Swimming Pool</h3>
@@ -833,32 +952,32 @@
 
                 <div class="amenity-card fade-in">
                     <div class="amenity-icon">
-                        <i class="fas fa-dumbbell"></i>
+                        <img src="image/laundr2.jpg" alt="Laundry Service">
                     </div>
                     <div class="amenity-content">
-                        <h3 class="amenity-title">State-of-the-Art Fitness Center</h3>
-                        <p class="amenity-description">Maintain your fitness routine in our fully equipped gym, featuring the latest exercise equipment and wellness facilities.</p>
+                        <h3 class="amenity-title">Premium Laundry Service</h3>
+                        <p class="amenity-description">Enjoy the convenience of our professional laundry service, designed to keep your garments fresh, clean, and perfectly cared for throughout your stay. Whether it’s a quick refresh or delicate fabric care, we ensure the highest standards of cleanliness and efficiency.</p>
                         <ul class="amenity-features">
-                            <li>Modern cardio and strength equipment</li>
-                            <li>Personal training sessions available</li>
-                            <li>Yoga and fitness classes</li>
-                            <li>Locker rooms with premium amenities</li>
+                            <li>Same-day and express service options</li>
+                            <li>Expert handling of delicate fabrics</li>
+                            <li>Dry cleaning available upon request</li>
+                            <li>Convenient pickup and delivery to your room</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="amenity-card fade-in">
                     <div class="amenity-icon">
-                        <i class="fas fa-spa"></i>
+                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=200&fit=crop" alt="Bar & Lounge">
                     </div>
                     <div class="amenity-content">
-                        <h3 class="amenity-title">Royal Spa & Wellness</h3>
-                        <p class="amenity-description">Indulge in ultimate relaxation at our luxurious spa, offering a full range of treatments and wellness services.</p>
+                        <h3 class="amenity-title">Luxury Vibe - Bar & Lounge</h3>
+                        <p class="amenity-description">Step into an atmosphere of refined elegance where every detail is designed for sophistication. Savor expertly crafted cocktails, premium wines, and top-shelf spirits while enjoying a serene, upscale ambiance. Perfect for unwinding after a long day or hosting an intimate evening gathering.</p>
                         <ul class="amenity-features">
-                            <li>Full-service spa treatments</li>
-                            <li>Massage therapy and aromatherapy</li>
-                            <li>Sauna and steam rooms</li>
-                            <li>Couples treatment suites</li>
+                            <li>Signature cocktails prepared by skilled mixologists</li>
+                            <li>Curated selection of fine wines and champagnes</li>
+                            <li>Elegant décor with ambient lighting</li>
+                            <li>Ideal for business meetings or refined leisure</li>
                         </ul>
                     </div>
                 </div>
@@ -885,10 +1004,10 @@
 
                 <div class="featured-card slide-in">
                     <div class="featured-icon">
-                        <i class="fas fa-baby"></i>
+                        <i class="fas fa-solid fa-bolt"></i>
                     </div>
-                    <h3 class="featured-title">Childcare Services</h3>
-                    <p class="featured-text">Professional babysitting and children's activities to ensure the whole family enjoys their stay.</p>
+                    <h3 class="featured-title">24/7 Power Supply</h3>
+                    <p class="featured-text">Adequate power supply available 24/7 across the hotel to make your stay enjoyable.</p>
                 </div>
 
                 <div class="featured-card slide-in">
@@ -899,15 +1018,7 @@
                     <p class="featured-text">Fully equipped business facilities with meeting rooms, printing services, and high-speed internet.</p>
                 </div>
 
-                <div class="featured-card slide-in">
-                    <div class="featured-icon">
-                        <i class="fas fa-tshirt"></i>
-                    </div>
-                    <h3 class="featured-title">Laundry Service</h3>
-                    <p class="featured-text">Same-day laundry and dry cleaning services to keep you looking your best throughout your stay.</p>
-                </div>
-            </div>
-        </div>
+             
     </section>
 
     <!-- CTA Section -->
@@ -916,7 +1027,7 @@
             <div class="cta-content">
                 <h2>Experience Royal Treatment</h2>
                 <p>Book your stay today and discover why our amenities set us apart</p>
-                <a href="#book" class="cta-button">Reserve Your Stay</a>
+                <a href="contact.html" class="cta-button">Reserve Your Stay</a>
             </div>
         </div>
     </section>
@@ -924,7 +1035,7 @@
     <!-- White spacer section -->
 <div class="white-divider"></div>
 
-    <!-- Footer -->
+<!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-content">
@@ -949,9 +1060,10 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="room.html">Rooms & Suites</a></li>
-                        <li><a href="amneitites.html">Amenities</a></li>
+                        <li><a href="amneitites.html" class="active">Amenities</a></li>
+                          <li><a href="Meeting.html">Meetings & Events</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="#" class="active">About Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -973,11 +1085,11 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Royal Avenue<br>Downtown District, City 12345</span>
+                            <span>Km 8 Benin-Auchi Express Road,<br>Eyaen, Benin City, Edo State</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+1 (555) 123-4567</span>
+                            <span>+234 703 332 4718, +234 815 263 1194</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
@@ -1070,13 +1182,11 @@
 
         // CTA button click effect
         document.querySelector('.cta-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            
             // Create ripple effect
             const ripple = document.createElement('span');
             const rect = this.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
-            
+
             ripple.style.width = ripple.style.height = size + 'px';
             ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
             ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
@@ -1086,15 +1196,12 @@
             ripple.style.transform = 'scale(0)';
             ripple.style.animation = 'ripple 0.6s linear';
             ripple.style.pointerEvents = 'none';
-            
+
             this.appendChild(ripple);
-            
+
             setTimeout(() => {
                 ripple.remove();
             }, 600);
-            
-            // Here you would typically redirect to booking page
-            alert('Booking system integration coming soon!');
         });
 
         // Add ripple animation keyframes
@@ -1220,6 +1327,50 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
+        });
+    </script>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const captionText = document.getElementById('caption');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Make all amenity images clickable
+        document.querySelectorAll('.amenity-icon img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            });
+        });
+
+        // Close modal when clicking the close button
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
         });
     </script>
 </body>

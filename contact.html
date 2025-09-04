@@ -6,8 +6,14 @@
     <title>Contact Us - Zafike Royal Hotel</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Replace with your EmailJS public key
+        })();
+    </script>
     <style>
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -22,7 +28,6 @@
             --text-dark: #2c3e50;
             --shadow-light: 0 4px 20px rgba(0, 85, 50, 0.1);
             --shadow-medium: 0 8px 30px rgba(0, 85, 50, 0.15);
-            --shadow-strong: 0 12px 40px rgba(0, 85, 50, 0.2);
             --transition: all 0.3s ease;
         }
 
@@ -38,15 +43,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 85, 50, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--forest-green);
             z-index: 1000;
             padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            background: var(--forest-green);
             box-shadow: var(--shadow-medium);
         }
 
@@ -86,7 +85,8 @@
             transition: var(--transition);
         }
 
-        .nav-menu a.active {
+        .nav-menu a.active,
+        .nav-menu a:hover {
             color: var(--golden-yellow);
         }
 
@@ -120,11 +120,43 @@
             transition: var(--transition);
         }
 
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--forest-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-dark);
+        }
         /* Page Header */
         .page-header {
             height: 50vh;
             background: linear-gradient(135deg, rgba(0, 85, 50, 0.8), rgba(207, 175, 83, 0.3)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23005532" width="1200" height="600"/><rect fill="%23CFAF53" width="400" height="200" x="100" y="200" opacity="0.15"/><circle fill="%23E8D084" cx="1000" cy="100" r="60" opacity="0.2"/><rect fill="%23CFAF53" width="300" height="150" x="700" y="350" opacity="0.1"/></svg>');
+                        url(image/telephone.jpg);
             background-size: cover;
             background-position: center;
             display: flex;
@@ -468,39 +500,11 @@
             animation-delay: 0.6s;
         }
 
-        .map-placeholder {
+        .map-container iframe {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--forest-green), var(--golden-yellow));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
-            position: relative;
-        }
-
-        .map-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, 
-                rgba(0, 85, 50, 0.8) 0%, 
-                rgba(207, 175, 83, 0.6) 100%);
-        }
-
-        .map-placeholder-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .map-placeholder i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            border: none;
+            border-radius: 20px;
         }
 
         /* Hours Section */
@@ -851,10 +855,10 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="room.html">Rooms & Suites</a></li>
                 <li><a href="amneitites.html">Amenities</a></li>
-                  <li><a href="Meeting.html" >Meetings & Events</a></li>
+             <li><a href="Meeting.html">Meetings & Events</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="#" class="active">Contact</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
             <div class="mobile-menu">
                 <span></span>
@@ -901,9 +905,9 @@
                         <h3 class="contact-card-title">Phone</h3>
                         <div class="contact-card-info">
                             <p><strong>Front Desk:</strong></p>
-                            <p><a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+                            <p><a href="tel:+2348152631194">+234 815 263 1194</a></p>
                             <p><strong>Reservations:</strong></p>
-                            <p><a href="tel:+15551234568">+1 (555) 123-4568</a></p>
+                            <p><a href="tel:+2347033324718">+234 703 332 4718</a></p>
                             <p><em>Available 24/7</em></p>
                         </div>
                     </div>
@@ -915,11 +919,11 @@
                         <h3 class="contact-card-title">Email</h3>
                         <div class="contact-card-info">
                             <p><strong>General Inquiries:</strong></p>
-                            <p><a href="mailto:info@zafikeroyal.com">info@zafikeroyal.com</a></p>
+                            <p><a href="mailto:info@zafikeroyal.com">Zafikeroyalhotel@yahoo.com</a></p>
                             <p><strong>Reservations:</strong></p>
-                            <p><a href="mailto:reservations@zafikeroyal.com">reservations@zafikeroyal.com</a></p>
+                            <p><a href="mailto:reservations@zafikeroyal.com">Zafikeroyalhotel@yahoo.com</a></p>
                             <p><strong>Events:</strong></p>
-                            <p><a href="mailto:events@zafikeroyal.com">events@zafikeroyal.com</a></p>
+                            <p><a href="mailto:events@zafikeroyal.com">Zafikeroyalhotel@yahoo.com</a></p>
                         </div>
                     </div>
                     
@@ -930,10 +934,10 @@
                         <h3 class="contact-card-title">Address</h3>
                         <div class="contact-card-info">
                             <p><strong>Zafike Royal Hotel</strong></p>
-                            <p>123 Royal Avenue</p>
-                            <p>Downtown District</p>
-                            <p>City 12345</p>
-                            <p><em>Prime downtown location</em></p>
+                            <p>Km 8 Benin-Auchi Express Road,</p>
+                            <p>Eyaen,</p>
+                            <p> Benin City,</p>
+                            <p><em>Edo State.</em></p>
                         </div>
                     </div>
                     
@@ -952,7 +956,7 @@
                             Ready to experience luxury at Zafike Royal Hotel? Fill out our contact form and our team will get back to you within 24 hours. Whether you're planning a romantic getaway, business trip, or special celebration, we're here to make it memorable.
                         </p>
                         <p class="form-description">
-                            For immediate assistance or urgent inquiries, please call our 24/7 front desk at <strong>(555) 123-4567</strong>. Our concierge team is always ready to help with reservations, recommendations, and any special requests.
+                            For immediate assistance or urgent inquiries, please call our 24/7 front desk at <strong>+234 703 332 4718, +234 815 263 1194</strong>. Our concierge team is always ready to help with reservations, recommendations, and any special requests.
                         </p>
                     </div>
                     
@@ -1015,14 +1019,7 @@
             <div class="map-section">
                 <h2 class="section-title">Find Us</h2>
                 <div class="map-container">
-                    <div class="map-placeholder">
-                        <div class="map-placeholder-content">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <h3>Zafike Royal Hotel</h3>
-                            <p>123 Royal Avenue, Downtown District</p>
-                            <p>Click to view interactive map</p>
-                        </div>
-                    </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.047736636865!2d5.722179173991749!3d6.38784159360261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10472aa60b3f3c21%3A0x3da77ea41c5a0350!2sZafike%20Royal%20Hotel!5e0!3m2!1sen!2sng!4v1756847834870!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -1050,7 +1047,7 @@
                     <div class="hours-time">6:00 AM - 11:00 PM</div>
                 </div>
                 <div class="hours-item">
-                    <div class="hours-service">Spa & Wellness</div>
+                    <div class="hours-service">Laundry Service</div>
                     <div class="hours-time">7:00 AM - 10:00 PM</div>
                 </div>
                 <div class="hours-item">
@@ -1061,113 +1058,84 @@
         </div>
     </section>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-content">
-                <div class="footer-section footer-logo">
-                    <h3>Zafike Royal Hotel</h3>
-                    <p class="footer-tagline">Where Luxury Meets Excellence</p>
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Zafike Royal Hotel</h3>
+                        <p class="footer-tagline">Your Royal Experience Awaits</p>
+                    </div>
                     <p class="footer-description">
-                        Experience unparalleled luxury and exceptional service in the heart of the city. Our commitment to excellence ensures every moment of your stay is truly memorable.
+                        Experience luxury and elegance at Zafike Royal Hotel, where every guest is treated like royalty. Creating unforgettable memories since 1985.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/zafikeroyalhotel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4 class="footer-title">Quick Links</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="room.html">Rooms & Suites</a></li>
-                        <li><a href="amenities.html">Amenities</a></li>
+                        <li><a href="amneitites.html">Amenities</a></li>
+                         <li><a href="Meeting.html">Meetings & Events</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="#" class="active">Contact</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h4 class="footer-title">Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Room Service</a></li>
-                        <li><a href="#">Concierge</a></li>
-                        <li><a href="#">Spa & Wellness</a></li>
-                        <li><a href="#">Fine Dining</a></li>
-                        <li><a href="#">Event Planning</a></li>
-                        <li><a href="#">Business Center</a></li>
-                    </ul>
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p style="margin-bottom: 1rem;">Subscribe for exclusive offers and updates</p>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="email" placeholder="Your email" style="flex: 1; padding: 0.5rem; border: none; border-radius: 5px;">
+                        <button style="background: var(--golden-yellow); color: var(--forest-green); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Subscribe</button>
+                    </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4 class="footer-title">Contact Info</h4>
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Royal Avenue<br>Downtown District, City 12345</span>
+                            <span>Km 8 Benin-Auchi Express Road,<br>Eyaen, Benin City, Edo State</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+1 (555) 123-4567</span>
+                            <span>+234 703 332 4718, +234 815 263 1194</span>
+                            
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>info@zafikeroyal.com</span>
+                            <span>Zafikeroyalhotel@yahoo.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <span>Front Desk: 24/7</span>
+                            <span>24/7 Front Desk Service</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p>&copy; 2024 Zafike Royal Hotel. All rights reserved.</p>
                     <div class="footer-bottom-links">
                         <a href="#">Privacy Policy</a>
                         <a href="#">Terms of Service</a>
-                        <a href="#">Accessibility</a>
+                        <a href="#">Sitemap</a>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
-    <script>
-   const mobileMenu = document.querySelector('.mobile-menu');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-
-    // Toggle menu on hamburger click
-    mobileMenu.addEventListener('click', function () {
-        navMenu.classList.toggle('active');
-        mobileMenu.classList.toggle('open');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
-    });
-
-    // Close menu when a link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        });
-    });
-</script>
 
     <!-- JavaScript -->
     <script>
@@ -1179,6 +1147,25 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        mobileMenu.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
         });
 
         // Contact form submission
@@ -1207,31 +1194,37 @@
                 return;
             }
             
-            // Simulate form submission
+            // EmailJS integration
             const submitBtn = this.querySelector('.btn-primary');
             const originalText = submitBtn.innerHTML;
             
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
-            // Simulate API call
-            setTimeout(() => {
+            emailjs.send("service_cw1dzj7", "template_hr882sv", {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                subject: subject,
+                message: message
+            }).then(() => {
                 alert(`Thank you, ${firstName}! Your message has been sent successfully. We'll get back to you within 24 hours.`);
-                
                 // Reset form
                 this.reset();
-                
                 // Reset button
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+            }).catch((error) => {
+                alert('Oops! Something went wrong. Please try again later.');
+                console.error('EmailJS Error:', error);
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
         });
 
-        // Map click functionality
-        document.querySelector('.map-placeholder').addEventListener('click', function() {
-            // In a real implementation, this would open Google Maps or another mapping service
-            alert('Opening map in new window...\n\nZafike Royal Hotel\n123 Royal Avenue\nDowntown District, City 12345');
-        });
+
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1245,12 +1238,6 @@
                     });
                 }
             });
-        });
-
-        // Mobile menu toggle (basic implementation)
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         });
 
         // Add loading animation to buttons on click

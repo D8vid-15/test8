@@ -6,6 +6,7 @@
     <title>Events & Meetings - Zafike Royal Hotel</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -37,15 +38,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 85, 50, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--forest-green);
             z-index: 1000;
             padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            background: var(--forest-green);
             box-shadow: var(--shadow-medium);
         }
 
@@ -84,12 +79,12 @@
             position: relative;
             transition: var(--transition);
         }
-        
+
         .nav-menu a.active,
         .nav-menu a:hover {
             color: var(--golden-yellow);
         }
-        
+
         .nav-menu a::after {
             content: '';
             position: absolute;
@@ -120,7 +115,7 @@
             transition: var(--transition);
         }
 
-         /* Breadcrumb */
+        /* Breadcrumb */
         .breadcrumb {
             background: var(--light-gray);
             padding: 1rem 0;
@@ -157,7 +152,7 @@
         .hero {
             height: 70vh;
             background: linear-gradient(135deg, rgba(0, 85, 50, 0.8), rgba(207, 175, 83, 0.4)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23005532" width="1200" height="600"/><rect fill="%23CFAF53" width="800" height="200" x="200" y="150" opacity="0.3"/><circle fill="%23E8D084" cx="300" cy="100" r="60" opacity="0.2"/><rect fill="%23CFAF53" width="600" height="150" x="400" y="350" opacity="0.2"/><circle fill="%23005532" cx="900" cy="450" r="80" opacity="0.3"/></svg>');
+                        url(image/amenny.jpg);
             background-size: cover;
             background-position: center;
             display: flex;
@@ -428,32 +423,33 @@
 
         .gallery-slide {
             height: 400px;
-            background: linear-gradient(135deg, var(--forest-green), var(--golden-yellow));
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
             position: relative;
+            display: none;
+            overflow: hidden;
         }
 
         .gallery-slide.active {
-            display: flex;
+            display: block;
         }
 
-        .gallery-slide::before {
-            content: '';
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-slide span {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .gallery-nav {
@@ -956,7 +952,7 @@
             <nav class="breadcrumb-nav">
                 <a href="index.html">Home</a>
                 <i class="fas fa-chevron-right"></i>
-                <span>Events & Meetings</span>
+                <span>Meetings & Events</span>
             </nav>
         </div>
     </section>
@@ -1040,7 +1036,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="venue-highlight">Royal Ballroom</span></td>
+                            <td><span class="venue-highlight">Royal Ballroom/ Banquet</span></td>
                             <td>2,500</td>
                             <td>200 Banquet / 300 Reception</td>
                             <td>Banquet, Theatre, Reception</td>
@@ -1048,29 +1044,29 @@
                         </tr>
                         <tr>
                             <td><span class="venue-highlight">Executive Boardroom</span></td>
-                            <td>600</td>
-                            <td>20 Boardroom / 30 Theatre</td>
+                            <td>200</td>
+                            <td>50 Boardroom / 70 Theatre</td>
                             <td>Boardroom, U-shape, Theatre</td>
                             <td>4K projector, Video conferencing, Executive seating</td>
                         </tr>
                         <tr>
-                            <td><span class="venue-highlight">Garden Pavilion</span></td>
-                            <td>1,800</td>
-                            <td>120 Banquet / 180 Reception</td>
+                            <td><span class="venue-highlight">Royal Hall</span></td>
+                            <td>800</td>
+                            <td>70 Banquet / 100 Reception</td>
                             <td>Banquet, Cocktail, Garden party</td>
                             <td>Outdoor setting, Climate control, Scenic views</td>
                         </tr>
                         <tr>
-                            <td><span class="venue-highlight">Conference Hall</span></td>
-                            <td>1,200</td>
-                            <td>80 Classroom / 150 Theatre</td>
-                            <td>Classroom, Theatre, Workshop</td>
-                            <td>Multiple screens, Wireless mics, Breakout spaces</td>
+                            <td><span class="venue-highlight">Conference Board Room</span></td>
+                            <td>100</td>
+                            <td>30 Cozy / 45 Theatre</td>
+                            <td>Classroom,Theatre, Workshop</td>
+                            <td>Projector, Wireless mics, Breakout spaces</td>
                         </tr>
                         <tr>
-                            <td><span class="venue-highlight">Intimate Lounge</span></td>
-                            <td>400</td>
-                            <td>25 Reception / 15 Seated</td>
+                            <td><span class="venue-highlight">Pool Side for Party</span></td>
+                            <td>outdoor</td>
+                            <td>25 Reception / 50 Seated</td>
                             <td>Cocktail, Intimate dining</td>
                             <td>Private bar, Cozy atmosphere, Personalized service</td>
                         </tr>
@@ -1160,15 +1156,19 @@
             </div>
             <div class="gallery-slider">
                 <div class="gallery-slide active">
+                <img src="image/party.JPG">
                     <span>Royal Ballroom - Wedding Reception</span>
                 </div>
                 <div class="gallery-slide">
+                    <img src="image/confe.png">
                     <span>Executive Boardroom - Corporate Meeting</span>
                 </div>
                 <div class="gallery-slide">
                     <span>Garden Pavilion - Anniversary Celebration</span>
+                    <img src="image/party2.jpg">
                 </div>
                 <div class="gallery-slide">
+                    <img src="image/con1.JPG">
                     <span>Conference Hall - Business Seminar</span>
                 </div>
                 <button class="gallery-nav gallery-prev" onclick="changeSlide(-1)">
@@ -1287,7 +1287,7 @@
                     </p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/zafikeroyalhotel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                     </div>
@@ -1299,8 +1299,9 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="room.html">Rooms & Suites</a></li>
                         <li><a href="amneitites.html">Amenities</a></li>
+                         <li><a href="Meeting.html" class="active">Meetings & Events</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="#" class="active">About Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -1309,7 +1310,7 @@
                     <h4 class="footer-title">Services</h4>
                     <ul class="footer-links">
                         <li><a href="#">Room Service</a></li>
-                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Laundry Service</a></li>
                         <li><a href="#">Fine Dining</a></li>
                         <li><a href="#">Event Planning</a></li>
                         <li><a href="#">Business Center</a></li>
@@ -1322,15 +1323,15 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Royal Avenue<br>Downtown District, City 12345</span>
+                            <span>Km 8 Benin-Auchi Express Road,<br>Eyaen, Benin City, Edo State</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+1 (555) 123-4567</span>
+                            <span>+234 703 332 4718, +234 815 263 1194</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>info@zafikeroyal.com</span>
+                            <span>Zafikeroyalhotel@yahoo.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
@@ -1376,6 +1377,8 @@
 </script>
 
     <script>
+        // Initialize EmailJS with your public key
+        emailjs.init('YOUR_PUBLIC_KEY');
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -1419,30 +1422,46 @@
         // Form submission
         document.getElementById('eventForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Basic form validation
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const eventType = document.getElementById('eventType').value;
-            
+
             if (!fullName || !email || !eventType) {
                 alert('Please fill in all required fields.');
                 return;
             }
-            
-            // Simulate form submission
+
+            // Prepare the email parameters
+            const templateParams = {
+                fullName: fullName,
+                email: email,
+                phone: document.getElementById('phone').value,
+                eventType: eventType,
+                guestCount: document.getElementById('guestCount').value,
+                eventDate: document.getElementById('eventDate').value,
+                message: document.getElementById('message').value
+            };
+
             const submitBtn = document.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
-            
+
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Thank you for your inquiry! Our event planning team will contact you within 24 hours to discuss your event details.');
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+
+            // Send email using EmailJS
+            emailjs.send('service_XXXXXX', 'template_XXXXXX', templateParams)
+                .then(() => {
+                    alert('Thank you for your inquiry! Our event planning team will contact you within 24 hours to discuss your event details.');
+                    this.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, (error) => {
+                    alert('Failed to send the message. Please try again later.');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
         });
 
         // Smooth scrolling for anchor links

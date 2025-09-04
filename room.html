@@ -6,8 +6,16 @@
     <title>Rooms & Suites - Zafike Royal Hotel</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("ipGr_l0BmU7HA__ks");
+        })();
+    </script>
     <style>
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -22,7 +30,6 @@
             --text-dark: #2c3e50;
             --shadow-light: 0 4px 20px rgba(0, 85, 50, 0.1);
             --shadow-medium: 0 8px 30px rgba(0, 85, 50, 0.15);
-            --shadow-strong: 0 12px 40px rgba(0, 85, 50, 0.2);
             --transition: all 0.3s ease;
         }
 
@@ -38,15 +45,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 85, 50, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--forest-green);
             z-index: 1000;
             padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            background: var(--forest-green);
             box-shadow: var(--shadow-medium);
         }
 
@@ -86,7 +87,8 @@
             transition: var(--transition);
         }
 
-        .nav-menu a.active {
+        .nav-menu a.active,
+        .nav-menu a:hover {
             color: var(--golden-yellow);
         }
 
@@ -120,11 +122,44 @@
             transition: var(--transition);
         }
 
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--forest-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-dark);
+        }
+
         /* Page Header */
         .page-header {
             height: 50vh;
             background: linear-gradient(135deg, rgba(0, 85, 50, 0.8), rgba(207, 175, 83, 0.3)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23005532" width="1200" height="600"/><rect fill="%23CFAF53" width="400" height="200" x="100" y="200" opacity="0.15"/><circle fill="%23E8D084" cx="1000" cy="100" r="60" opacity="0.2"/><rect fill="%23CFAF53" width="300" height="150" x="700" y="350" opacity="0.1"/></svg>');
+                        url(image/rtoom.jpg);
             background-size: cover;
             background-position: center;
             display: flex;
@@ -291,9 +326,62 @@
 
         .room-image {
             height: 280px;
-            background: linear-gradient(135deg, var(--forest-green), var(--golden-yellow));
             position: relative;
             overflow: hidden;
+        }
+
+        .room-image.royal-executive {
+            background-image: url(image/royalexe.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.royal-deluxe {
+            background-image: url(image/royaldeluxe.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.exclusive-deluxe {
+            background-image: url(image/deluxe.JPG);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.queens-lodge {
+            background-image: url(image/queennn.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.kings-lodge {
+            background-image: url(image/kingg.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.royal-suite {
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .room-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .room-image.senator-suite {
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out;
         }
 
         .room-image::before {
@@ -469,8 +557,20 @@
         .modal-header {
             position: relative;
             height: 300px;
-            background: linear-gradient(135deg, var(--forest-green), var(--golden-yellow));
+            background-size: cover;
+            background-position: center;
             border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 85, 50, 0.4), rgba(207, 175, 83, 0.3));
+            z-index: 2;
         }
 
         .modal-close {
@@ -749,23 +849,24 @@
             <!-- Room Filter -->
             <div class="room-filter">
                 <button class="filter-btn active" data-filter="all">All Rooms</button>
-                <button class="filter-btn" data-filter="standard">Standard</button>
+                <button class="filter-btn" data-filter="Royal Executive">Royal Executive</button>
                 <button class="filter-btn" data-filter="deluxe">Deluxe</button>
                 <button class="filter-btn" data-filter="suite">Suites</button>
+                 <button class="filter-btn" data-filter="Lodge">Lodge</button>
             </div>
 
             <!-- Room Grid -->
             <div class="room-grid" id="roomGrid">
-                <!-- Standard Room -->
-                <div class="room-card" data-category="standard">
-                    <div class="room-image" data-room-type="Standard Room">
+                <!-- Royal Executive Room -->
+                <div class="room-card" data-category="Royal Executive">
+                    <div class="room-image royal-executive" data-room-type="Royal Executive Room">
                         <div class="room-badge">Popular</div>
                     </div>
                     <div class="room-content">
                         <div class="room-header">
                             <div>
-                                <h3 class="room-title">Standard Room</h3>
-                                <div class="room-price">$199 <span>per night</span></div>
+                                <h3 class="room-title">Royal Executive Room</h3>
+                                
                             </div>
                         </div>
                         <p class="room-description">
@@ -775,28 +876,29 @@
                             <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
                             <span class="feature-tag"><i class="fas fa-snowflake"></i> Air Conditioning</span>
                             <span class="feature-tag"><i class="fas fa-tv"></i> Smart TV</span>
-                            <span class="feature-tag"><i class="fas fa-bath"></i> Private Bathroom</span>
-                            <span class="feature-tag"><i class="fas fa-bed"></i> Queen Bed</span>
+                          <span class="feature-tag"><i class="fas fa-bath"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Kings Bed</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
                         </div>
                         <div class="room-actions">
-                            <a href="#" class="btn btn-primary" onclick="bookRoom('Standard Room', 199)">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Executive Room', 31000)">
                                 <i class="fas fa-calendar-check"></i> Book Now
                             </a>
-                            <a href="#" class="btn btn-secondary" onclick="viewDetails('standard')">
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Royal Executive')">
                                 <i class="fas fa-eye"></i> View Details
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Deluxe Room -->
+                <!-- Royal Deluxe Room -->
                 <div class="room-card" data-category="deluxe">
-                    <div class="room-image" data-room-type="Deluxe Room"></div>
+                    <div class="room-image royal-deluxe" data-room-type="Royal Deluxe Room"></div>
                     <div class="room-content">
                         <div class="room-header">
                             <div>
-                                <h3 class="room-title">Deluxe Room</h3>
-                                <div class="room-price">$299 <span>per night</span></div>
+                                <h3 class="room-title">Royal Deluxe Room</h3>
+                                
                             </div>
                         </div>
                         <p class="room-description">
@@ -811,78 +913,112 @@
                             <span class="feature-tag"><i class="fas fa-couch"></i> Seating Area</span>
                         </div>
                         <div class="room-actions">
-                            <a href="#" class="btn btn-primary" onclick="bookRoom('Deluxe Room', 299)">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Deluxe Room', 27000)">
                                 <i class="fas fa-calendar-check"></i> Book Now
                             </a>
-                            <a href="#" class="btn btn-secondary" onclick="viewDetails('deluxe')">
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Royal deluxe')">
                                 <i class="fas fa-eye"></i> View Details
                             </a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Junior Suite -->
-                <div class="room-card" data-category="suite">
-                    <div class="room-image" data-room-type="Junior Suite"></div>
+                <!-- Exclusive Deluxe Room -->
+                <div class="room-card" data-category="deluxe">
+                    <div class="room-image exclusive-deluxe" data-room-type="Exclusive Deluxe Room"></div>
                     <div class="room-content">
                         <div class="room-header">
                             <div>
-                                <h3 class="room-title">Junior Suite</h3>
-                                <div class="room-price">$449 <span>per night</span></div>
+                                <h3 class="room-title">Exclusive Deluxe Room</h3>
+                                
                             </div>
                         </div>
                         <p class="room-description">
-                            Experience luxury living in our Junior Suites, featuring separate living areas, premium furnishings, and exclusive amenities.
+                            Spacious and sophisticated, our Deluxe Rooms feature premium amenities, elegant décor, and enhanced comfort for discerning guests.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-snowflake"></i> Air Conditioning</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Smart TV</span>
+                            <span class="feature-tag"><i class="fas fa-bath"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> King Bed</span>
+                            <span class="feature-tag"><i class="fas fa-couch"></i> Seating Area</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Exclusive Deluxe Room', 30000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Exclusive deluxe')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- Queens Lodge-->
+                <div class="room-card" data-category="Lodge">
+                    <div class="room-image queens-lodge" data-room-type="Queens Lodge"></div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Queens Lodge</h3>
+                               
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Experience luxury living in our Queens Lodge, featuring separate living areas, premium furnishings, and exclusive amenities.
                         </p>
                         <div class="room-features">
                             <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
                             <span class="feature-tag"><i class="fas fa-snowflake"></i> Climate Control</span>
                             <span class="feature-tag"><i class="fas fa-tv"></i> Premium TV</span>
                             <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
-                            <span class="feature-tag"><i class="fas fa-bed"></i> King Bed</span>
-                            <span class="feature-tag"><i class="fas fa-couch"></i> Living Area</span>
-                            <span class="feature-tag"><i class="fas fa-coffee"></i> Minibar</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Queens Bed</span>
+                            <span class="feature-tag"><i class="fas fa-couch"></i> Sitting Area</span>
+                            <span class="feature-tag"><i class="fas fa-coffee"></i> MiniTable</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
                         </div>
                         <div class="room-actions">
-                            <a href="#" class="btn btn-primary" onclick="bookRoom('Junior Suite', 449)">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Queens Lodge', 34000)">
                                 <i class="fas fa-calendar-check"></i> Book Now
                             </a>
-                            <a href="#" class="btn btn-secondary" onclick="viewDetails('junior-suite')">
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Queens Lodge')">
                                 <i class="fas fa-eye"></i> View Details
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Executive Suite -->
-                <div class="room-card" data-category="suite">
-                    <div class="room-image" data-room-type="Executive Suite">
+                <!-- Kings Lodge -->
+                <div class="room-card" data-category="Lodge">
+                    <div class="room-image kings-lodge" data-room-type="Kings Lodge">
                         <div class="room-badge">Premium</div>
                     </div>
                     <div class="room-content">
                         <div class="room-header">
                             <div>
-                                <h3 class="room-title">Executive Suite</h3>
-                                <div class="room-price">$699 <span>per night</span></div>
+                                <h3 class="room-title">Kings Lodge</h3>
+                                
                             </div>
                         </div>
                         <p class="room-description">
-                            Our Executive Suites offer unparalleled luxury with spacious layouts, premium amenities, and personalized concierge service.
+                            Our Kings Lodge offer unparalleled luxury with spacious layouts, premium amenities, and personalized concierge service.
                         </p>
                         <div class="room-features">
                             <span class="feature-tag"><i class="fas fa-wifi"></i> Premium Wi-Fi</span>
                             <span class="feature-tag"><i class="fas fa-wind"></i> Climate Control</span>
                             <span class="feature-tag"><i class="fas fa-tv"></i> Entertainment System</span>
-                            <span class="feature-tag"><i class="fas fa-spa"></i> Spa Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
                             <span class="feature-tag"><i class="fas fa-bed"></i> California King</span>
                             <span class="feature-tag"><i class="fas fa-utensils"></i> Dining Area</span>
                             <span class="feature-tag"><i class="fas fa-concierge-bell"></i> Concierge</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
                         </div>
                         <div class="room-actions">
-                            <a href="#" class="btn btn-primary" onclick="bookRoom('Executive Suite', 699)">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Kings Lodge', 36000)">
                                 <i class="fas fa-calendar-check"></i> Book Now
                             </a>
-                            <a href="#" class="btn btn-secondary" onclick="viewDetails('executive-suite')">
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Kings Lodge')">
                                 <i class="fas fa-eye"></i> View Details
                             </a>
                         </div>
@@ -891,14 +1027,14 @@
 
                 <!-- Royal Suite -->
                 <div class="room-card" data-category="suite">
-                    <div class="room-image" data-room-type="Royal Suite">
+                    <div class="room-image royal-suite" data-room-type="Royal Suite">
                         <div class="room-badge">Luxury</div>
                     </div>
                     <div class="room-content">
                         <div class="room-header">
                             <div>
                                 <h3 class="room-title">Royal Suite</h3>
-                                <div class="room-price">$999 <span>per night</span></div>
+                                
                             </div>
                         </div>
                         <p class="room-description">
@@ -908,14 +1044,15 @@
                             <span class="feature-tag"><i class="fas fa-wifi"></i> Premium Wi-Fi</span>
                             <span class="feature-tag"><i class="fas fa-wind"></i> Smart Climate</span>
                             <span class="feature-tag"><i class="fas fa-tv"></i> Home Theater</span>
-                            <span class="feature-tag"><i class="fas fa-spa"></i> Spa Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
                             <span class="feature-tag"><i class="fas fa-bed"></i> Master Bedroom</span>
                             <span class="feature-tag"><i class="fas fa-utensils"></i> Private Dining</span>
                             <span class="feature-tag"><i class="fas fa-concierge-bell"></i> Butler Service</span>
-                            <span class="feature-tag"><i class="fas fa-glass-cheers"></i> Premium Bar</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                            
                         </div>
                         <div class="room-actions">
-                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Suite', 999)">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Suite', 45000)">
                                 <i class="fas fa-calendar-check"></i> Book Now
                             </a>
                             <a href="#" class="btn btn-secondary" onclick="viewDetails('royal-suite')">
@@ -925,36 +1062,35 @@
                     </div>
                 </div>
 
-                <!-- Presidential Suite -->
+                <!-- Senator Suite -->
                 <div class="room-card" data-category="suite">
-                    <div class="room-image" data-room-type="Presidential Suite">
+                    <div class="room-image senator-suite" data-room-type="Senator Suite">
                         <div class="room-badge">Ultimate</div>
                     </div>
                     <div class="room-content">
                         <div class="room-header">
                             <div>
-                                <h3 class="room-title">Presidential Suite</h3>
-                                <div class="room-price">$1,499 <span>per night</span></div>
+                                <h3 class="room-title">Senator Suite</h3>
+                                
                             </div>
                         </div>
                         <p class="room-description">
-                            The ultimate luxury experience. Our Presidential Suite spans multiple rooms with private terrace, dedicated staff, and world-class amenities.
+                            The ultimate luxury experience. Our Senator Suite spans multiple rooms with private terrace, dedicated staff, and world-class amenities.
                         </p>
                         <div class="room-features">
                             <span class="feature-tag"><i class="fas fa-crown"></i> VIP Treatment</span>
-                            <span class="feature-tag"><i class="fas fa-building"></i> Private Terrace</span>
-                            <span class="feature-tag"><i class="fas fa-car"></i> Airport Transfer</span>
-                            <span class="feature-tag"><i class="fas fa-champagne-glasses"></i> Welcome Drinks</span>
-                            <span class="feature-tag"><i class="fas fa-bed"></i> 2 Bedrooms</span>
-                            <span class="feature-tag"><i class="fas fa-users"></i> Personal Staff</span>
-                            <span class="feature-tag"><i class="fas fa-utensils"></i> Private Chef</span>
-                            <span class="feature-tag"><i class="fas fa-spa"></i> In-Room Spa</span>
+                             <span class="feature-tag"><i class="fas fa-wifi"></i> Premium Wi-Fi</span>
+                             <span class="feature-tag"><i class="fas fa-wind"></i> Smart Climate</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Fine suite</span>
+                            <span class="feature-tag"><i class="fas fa-concierge-bell"></i> Butler Service</span>
+                            <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
                         </div>
                         <div class="room-actions">
-                            <a href="#" class="btn btn-primary" onclick="bookRoom('Presidential Suite', 1499)">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Senator Suite', 45000)">
                                 <i class="fas fa-calendar-check"></i> Book Now
                             </a>
-                            <a href="#" class="btn btn-secondary" onclick="viewDetails('presidential-suite')">
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Senator-suite')">
                                 <i class="fas fa-eye"></i> View Details
                             </a>
                         </div>
@@ -980,7 +1116,7 @@
                         <i class="fas fa-percent"></i>
                     </div>
                     <h3 class="offer-title">Early Bird Special</h3>
-                    <p>Book 30 days in advance and save up to 25% on all room types. Perfect for planned getaways and business trips.</p>
+                    <p>Book 30 days in advance and save up to 15% on all room types. Perfect for planned getaways and business trips.</p>
                     <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
                 </div>
                 
@@ -989,7 +1125,7 @@
                         <i class="fas fa-calendar-week"></i>
                     </div>
                     <h3 class="offer-title">Extended Stay</h3>
-                    <p>Stay 7 nights or more and enjoy 15% off plus complimentary breakfast and airport transfers.</p>
+                    <p>Stay 7 nights or more and enjoy 10% off plus complimentary breakfast and airport transfers.</p>
                     <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
                 </div>
                 
@@ -998,17 +1134,55 @@
                         <i class="fas fa-heart"></i>
                     </div>
                     <h3 class="offer-title">Romance Package</h3>
-                    <p>Romantic suite upgrade, champagne, rose petals, and couple's spa treatment. Perfect for special occasions.</p>
+                    <p>Romantic suite upgrade, champagne, rose petals. Perfect for special occasions.</p>
                     <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-room-title">Book Your Stay at Zafike Royal Hotel</h2>
+                <form id="bookingForm" onsubmit="submitBooking(event)">
+                    <label for="checkin">Check-in Date:</label>
+                    <input type="date" id="checkin" name="checkin" required min="">
+
+                    <label for="checkout">Check-out Date:</label>
+                    <input type="date" id="checkout" name="checkout" required>
+
+                    <label for="room">Room Type:</label>
+                    <input type="text" id="room" name="room" required readonly>
+
+                    <input type="hidden" id="price" name="price">
+
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="requests">Special Requests:</label>
+                    <textarea id="requests" name="requests" rows="4" cols="30"></textarea>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </form>
+                <div id="confirmation"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Room Details Modal -->
     <div id="roomModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" id="modalHeader">
                 <button class="modal-close" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-body">
@@ -1019,7 +1193,7 @@
                     </div>
                     <div>
                         <h3 style="color: var(--golden-yellow); font-size: 1.5rem; margin-bottom: 1rem;">Starting from</h3>
-                        <div style="font-size: 2rem; font-weight: 600; color: var(--forest-green);" id="modalPrice">$199</div>
+                        <div style="font-size: 2rem; font-weight: 600; color: var(--forest-green);" id="modalPrice">N27000</div>
                         <p style="color: var(--text-dark); margin-top: 0.5rem;">per night</p>
                         <a href="#" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" id="modalBookBtn">
                             <i class="fas fa-calendar-check"></i> Book This Room
@@ -1037,7 +1211,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer style="background: var(--forest-green); color: var(--white); padding: 4rem 0 2rem;">
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
@@ -1056,8 +1229,9 @@
                     <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Quick Links</h4>
                     <ul style="list-style: none;">
                         <li style="margin-bottom: 0.5rem;"><a href="index.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Home</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--white); text-decoration: none; transition: var(--transition);">Rooms & Suites</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="room.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Rooms & Suites</a></li>
                         <li style="margin-bottom: 0.5rem;"><a href="amenities.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Amenities</a></li>
+                         <li style="margin-bottom: 0.5rem;"><a href="Meeting.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Meetings & Events</a></li>
                         <li style="margin-bottom: 0.5rem;"><a href="gallery.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Gallery</a></li>
                         <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">About Us</a></li>
                         <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Contact</a></li>
@@ -1068,15 +1242,15 @@
                     <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Contact Info</h4>
                     <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
                         <i class="fas fa-map-marker-alt" style="color: var(--golden-yellow); width: 20px; margin-right: 0.5rem;"></i>
-                        <span>123 Royal Street, City Center</span>
+                        <span>Km 8 Benin-Auchi Express Road,<br>Eyaen, Benin City, Edo State</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
                         <i class="fas fa-phone" style="color: var(--golden-yellow); width: 20px; margin-right: 0.5rem;"></i>
-                        <span>+1 (555) 123-4567</span>
+                        <span>+234 703 332 4718, +234 815 263 1194</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
                         <i class="fas fa-envelope" style="color: var(--golden-yellow); width: 20px; margin-right: 0.5rem;"></i>
-                        <span>info@zafikeroyal.com</span>
+                        <span>Zafikeroyalhotel@yahoo.com</span>
                     </div>
                 </div>
                 
@@ -1162,118 +1336,145 @@
 
         // Room details data
         const roomDetails = {
-            'standard': {
-                title: 'Standard Room',
-                price: '$199',
-                description: `Our Standard Rooms combine comfort and elegance in a thoughtfully designed space. Each room features modern amenities, comfortable furnishings, and city views. Perfect for business travelers or couples seeking a comfortable stay without compromising on quality.
-                
+            'Royal Executive': {
+                title: 'Royal Executive Room',
+                price: 'N31,000',
+                image: 'image/royalexe.png',
+                description: `Our Royal Executive Rooms combine comfort and elegance in a thoughtfully designed space. Each room features modern amenities, comfortable furnishings, and city views. Perfect for business travelers or couples seeking a comfortable stay without compromising on quality.
+
                 The room includes a comfortable queen-size bed with premium linens, a work desk with ergonomic chair, and a modern bathroom with rainfall shower. Large windows provide natural light and offer pleasant city views.`,
                 amenities: [
                     { icon: 'fas fa-wifi', text: 'Complimentary High-Speed Wi-Fi' },
                     { icon: 'fas fa-snowflake', text: 'Individual Air Conditioning' },
-                    { icon: 'fas fa-tv', text: '55" Smart TV with Streaming' },
-                    { icon: 'fas fa-bath', text: 'Private Bathroom with Rainfall Shower' },
-                    { icon: 'fas fa-bed', text: 'Queen Size Bed with Premium Linens' },
+                    { icon: 'fas fa-tv', text: 'Smart TV with Streaming' },
+                    { icon: 'fas fa-bath', text: 'Luxury Bathroom with Rainfall Shower' },
+                    { icon: 'fas fa-bed', text: 'King Size Bed with Premium Linens' },
                     { icon: 'fas fa-coffee', text: 'Coffee/Tea Making Facilities' },
-                    { icon: 'fas fa-iron', text: 'Iron and Ironing Board' },
                     { icon: 'fas fa-lock', text: 'Electronic Safe' },
                     { icon: 'fas fa-phone', text: 'Direct Dial Telephone' },
-                    { icon: 'fas fa-tshirt', text: 'Daily Housekeeping Service' }
+                    { icon: 'fas fa-tshirt', text: 'Daily Housekeeping Service' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' }
                 ]
             },
-            'deluxe': {
-                title: 'Deluxe Room',
-                price: '$299',
+            'Royal deluxe': {
+                title: 'Royal Deluxe Room',
+                price: 'N27,000',
+                image: 'image/royaldeluxe.png',
                 description: `Experience elevated comfort in our Deluxe Rooms, featuring spacious layouts and premium amenities. These rooms are designed for guests who appreciate fine details and superior comfort.
-                
+
                 Each Deluxe Room offers a separate seating area, king-size bed, luxury bathroom with bathtub, and enhanced amenities. The rooms feature elegant décor with attention to every detail, ensuring a memorable stay.`,
                 amenities: [
                     { icon: 'fas fa-wifi', text: 'Premium High-Speed Wi-Fi' },
                     { icon: 'fas fa-wind', text: 'Climate Control System' },
-                    { icon: 'fas fa-tv', text: '65" Smart TV with Premium Channels' },
+                    { icon: 'fas fa-tv', text: 'Smart TV with Premium Channels' },
                     { icon: 'fas fa-spa', text: 'Luxury Bathroom with Bathtub & Shower' },
                     { icon: 'fas fa-bed', text: 'King Size Bed with Luxury Linens' },
                     { icon: 'fas fa-couch', text: 'Separate Seating Area' },
                     { icon: 'fas fa-coffee', text: 'Premium Coffee & Tea Station' },
-                    { icon: 'fas fa-glass-cheers', text: 'Complimentary Welcome Drinks' },
-                    { icon: 'fas fa-robe', text: 'Luxury Bathrobes and Slippers' },
                     { icon: 'fas fa-concierge-bell', text: 'Enhanced Room Service Menu' }
                 ]
             },
-            'junior-suite': {
-                title: 'Junior Suite',
-                price: '$449',
-                description: `Our Junior Suites offer the perfect blend of luxury and space, featuring separate living and sleeping areas. Ideal for extended stays or special occasions.
-                
+             'Exclusive deluxe': {
+                title: 'Exclusive Deluxe Room',
+                price: 'N30,000',
+                image: 'image/deluxe.JPG',
+                description: `Experience elevated comfort in our Deluxe Rooms, featuring spacious layouts and premium amenities. These rooms are designed for guests who appreciate fine details and superior comfort.
+
+                Each Deluxe Room offers a separate seating area, king-size bed, luxury bathroom with bathtub, and enhanced amenities. The rooms feature elegant décor with attention to every detail, ensuring a memorable stay.`,
+                amenities: [
+                    { icon: 'fas fa-wifi', text: 'Premium High-Speed Wi-Fi' },
+                    { icon: 'fas fa-wind', text: 'Climate Control System' },
+                    { icon: 'fas fa-tv', text: 'Smart TV with Premium Channels' },
+                    { icon: 'fas fa-spa', text: 'Luxury Bathroom with Bathtub & Shower' },
+                    { icon: 'fas fa-bed', text: 'King Size Bed with Luxury Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Seating Area' },
+                    { icon: 'fas fa-coffee', text: 'Premium Coffee & Tea Station' },
+                    { icon: 'fas fa-concierge-bell', text: 'Enhanced Room Service Menu' }
+                ]
+            },
+            'Queens Lodge': {
+                title: 'Queens Lodge',
+                price: 'N34,000',
+                image: 'image/queennn.png',
+                description: `Our Queens Lodge offer the perfect blend of luxury and space, featuring separate living and sleeping areas. Ideal for extended stays or special occasions.
+
                 These suites feature a comfortable living room with sofa and work area, separate bedroom with king-size bed, luxury bathroom with premium amenities, and a well-stocked minibar.`,
                 amenities: [
                     { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
                     { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
-                    { icon: 'fas fa-tv', text: 'Multiple Smart TVs' },
                     { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
                     { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
-                    { icon: 'fas fa-couch', text: 'Separate Living Room' },
-                    { icon: 'fas fa-coffee', text: 'Espresso Machine & Premium Selection' },
-                    { icon: 'fas fa-glass-martini', text: 'Fully Stocked Minibar' },
-                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' },
-                    { icon: 'fas fa-newspaper', text: 'Daily Newspaper Service' }
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
                 ]
             },
-            'executive-suite': {
-                title: 'Executive Suite',
-                price: '$699',
-                description: `Experience unparalleled luxury in our Executive Suites, designed for discerning guests who expect the finest accommodations.
-                
+            'Kings Lodge': {
+                title: 'Kings Lodge',
+                price: 'N36,000',
+                image: 'image/kingg.png',
+                description: `Experience unparalleled luxury in our Kings Lodge, designed for discerning guests who expect the finest accommodations.
+
                 These expansive suites feature a master bedroom, spacious living room, dining area, luxury bathroom with spa amenities, and access to exclusive executive services including dedicated concierge.`,
                 amenities: [
-                    { icon: 'fas fa-crown', text: 'Executive Floor Access' },
+
                     { icon: 'fas fa-utensils', text: 'Private Dining Area' },
-                    { icon: 'fas fa-spa', text: 'Spa-Style Bathroom with Jacuzzi' },
                     { icon: 'fas fa-bed', text: 'California King Bed' },
-                    { icon: 'fas fa-building', text: 'Panoramic City Views' },
-                    { icon: 'fas fa-concierge-bell', text: 'Personal Concierge Service' },
-                    { icon: 'fas fa-car', text: 'Complimentary Airport Transfer' },
-                    { icon: 'fas fa-champagne-glasses', text: 'Daily Evening Cocktails' },
-                    { icon: 'fas fa-newspaper', text: 'International Newspaper Selection' },
-                    { icon: 'fas fa-dumbbell', text: 'Access to Executive Lounge' }
+                   { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
+                
                 ]
             },
             'royal-suite': {
                 title: 'Royal Suite',
-                price: '$999',
+                price: 'N45,000',
+                image: 'image/royalsuite1.png',
                 description: `The pinnacle of luxury accommodation, our Royal Suite offers an unmatched experience fit for royalty. This magnificent suite spans over 1,200 square feet of elegantly appointed space.
-                
+
                 Features include a master bedroom with California king bed, separate living and dining areas, premium kitchen facilities, spa-style bathroom with steam shower, and a private balcony with stunning views.`,
                 amenities: [
                     { icon: 'fas fa-crown', text: 'VIP Check-in/Check-out' },
-                    { icon: 'fas fa-utensils', text: 'Full Kitchen & Dining Area' },
+                    { icon: 'fas fa-utensils', text: ' Dining Area' },
                     { icon: 'fas fa-spa', text: 'Master Bathroom with Steam Shower' },
                     { icon: 'fas fa-bed', text: 'California King with Luxury Bedding' },
-                    { icon: 'fas fa-building', text: 'Private Balcony with Views' },
-                    { icon: 'fas fa-glass-cheers', text: 'Premium Liquor Selection' },
                     { icon: 'fas fa-user-tie', text: 'Dedicated Butler Service' },
-                    { icon: 'fas fa-car', text: 'Luxury Car Service' },
-                    { icon: 'fas fa-spa', text: 'In-Room Spa Services Available' },
-                    { icon: 'fas fa-phone', text: '24/7 Personal Assistant' }
+                   { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-tv', text: 'Multiple Smart TVs' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
+                
                 ]
             },
-            'presidential-suite': {
-                title: 'Presidential Suite',
-                price: '$1,499',
-                description: `The ultimate luxury experience, our Presidential Suite represents the finest in hospitality. This exceptional 2,000+ square foot suite offers unparalleled elegance and service.
-                
+            'Senator-suite': {
+                title: 'Senator Suite',
+                price: 'N45,000',
+                image: 'image/senator1.png',
+                description: `The ultimate luxury experience, our Senator Suite represents the finest in hospitality. This exceptional 2,000+ square foot suite offers unparalleled elegance and service.
+
                 The suite features two master bedrooms, expansive living areas, private dining room, full kitchen, multiple bathrooms, home theater system, and a stunning private terrace with panoramic city views.`,
                 amenities: [
-                    { icon: 'fas fa-crown', text: 'Presidential Treatment & Protocol' },
-                    { icon: 'fas fa-bed', text: 'Two Master Bedrooms' },
-                    { icon: 'fas fa-building', text: 'Private Terrace with City Views' },
-                    { icon: 'fas fa-utensils', text: 'Private Chef Service Available' },
-                    { icon: 'fas fa-car', text: 'Luxury Fleet at Disposal' },
-                    { icon: 'fas fa-users', text: 'Dedicated Staff Team' },
-                    { icon: 'fas fa-tv', text: 'Home Theater System' },
-                    { icon: 'fas fa-champagne-glasses', text: 'Premium Champagne Service' },
-                    { icon: 'fas fa-spa', text: 'Private Spa Treatment Room' },
-                    { icon: 'fas fa-plane', text: 'Helicopter Transfer Available' }
+                     { icon: 'fas fa-crown', text: 'VIP Check-in/Check-out' },
+                    { icon: 'fas fa-utensils', text: ' Dining Area' },
+                    { icon: 'fas fa-spa', text: 'Master Bathroom with Steam Shower' },
+                    { icon: 'fas fa-bed', text: 'California King with Luxury Bedding' },
+                    { icon: 'fas fa-user-tie', text: 'Dedicated Butler Service' },
+                   { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-tv', text: 'Multiple Smart TVs' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
                 ]
             }
         };
@@ -1282,21 +1483,22 @@
         function viewDetails(roomType) {
             const modal = document.getElementById('roomModal');
             const details = roomDetails[roomType];
-            
+
             if (details) {
                 document.getElementById('modalTitle').textContent = details.title;
                 document.getElementById('modalPrice').textContent = details.price;
                 document.getElementById('modalDescription').innerHTML = details.description.split('\n').map(p => `<p>${p.trim()}</p>`).join('');
-                document.getElementById('modalBookBtn').onclick = () => bookRoom(details.title, details.price.replace('$', ''));
-                
+                document.getElementById('modalBookBtn').onclick = () => bookRoom(details.title, parseInt(details.price.replace('N', '').replace(',', '')));
+                document.getElementById('modalHeader').style.backgroundImage = `url('${details.image}')`;
+
                 const amenitiesContainer = document.getElementById('modalAmenities');
-                amenitiesContainer.innerHTML = details.amenities.map(amenity => 
+                amenitiesContainer.innerHTML = details.amenities.map(amenity =>
                     `<div class="amenity-item">
                         <i class="${amenity.icon}"></i>
                         <span>${amenity.text}</span>
                     </div>`
                 ).join('');
-                
+
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
@@ -1309,11 +1511,129 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Book room function
+        // Book room function - opens booking modal
         function bookRoom(roomName, price) {
-            alert(`Booking ${roomName} at $${price} per night. Redirecting to booking system...`);
-            // Here you would typically redirect to a booking system or show a booking form
+            // Close room details modal if open
+            const roomModal = document.getElementById('roomModal');
+            if (roomModal.classList.contains('active')) {
+                roomModal.classList.remove('active');
+            }
+
+            const modal = document.getElementById('bookingModal');
+            const roomInput = document.getElementById('room');
+            const priceInput = document.getElementById('price');
+
+            // Set the room type and price in the form
+            roomInput.value = roomName;
+            priceInput.value = price;
+
+            // Show the booking modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+
+        // Close booking modal
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Submit booking form with EmailJS
+        function submitBooking(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const checkinDate = new Date(document.getElementById('checkin').value);
+            const checkoutDate = new Date(document.getElementById('checkout').value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set to start of today
+            
+            // Validate dates
+            if (checkinDate < today) {
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #721c24; margin-bottom: 0.5rem;">Invalid Check-in Date</h3>
+                        <p>Please select a check-in date that is today or in the future.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            if (checkoutDate <= checkinDate) {
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #721c24; margin-bottom: 0.5rem;">Invalid Check-out Date</h3>
+                        <p>Check-out date must be after check-in date.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const formData = {
+                checkin: document.getElementById('checkin').value,
+                checkout: document.getElementById('checkout').value,
+                room: document.getElementById('room').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                requests: document.getElementById('requests').value
+            };
+
+            // Send email using EmailJS
+            emailjs.send("service_cw1dzj7", "template_hr882sv", {
+                checkin_date: formData.checkin,
+                checkout_date: formData.checkout,
+                room_type: formData.room,
+                guest_name: formData.name,
+                guest_email: formData.email,
+                special_requests: formData.requests,
+                booking_date: new Date().toLocaleDateString(),
+                booking_time: new Date().toLocaleTimeString()
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                // Show success message
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #155724; margin-bottom: 0.5rem;">Booking Request Sent Successfully!</h3>
+                        <p>Thank you, ${formData.name}! Your booking request for the ${formData.room} has been received.</p>
+                        <p>We will contact you at ${formData.email} within 24 hours to confirm your reservation.</p>
+                    </div>
+                `;
+                
+                // Clear form
+                document.getElementById('bookingForm').reset();
+                
+                // Auto-close modal after 5 seconds
+                setTimeout(() => {
+                    closeBookingModal();
+                    document.getElementById('confirmation').innerHTML = '';
+                }, 5000);
+            })
+            .catch(function(error) {
+                console.log('FAILED...', error);
+                // Show error message
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #721c24; margin-bottom: 0.5rem;">Booking Failed</h3>
+                        <p>Sorry, there was an error processing your booking. Please try again or contact us directly.</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Close booking modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const bookingModal = document.getElementById('bookingModal');
+            const roomModal = document.getElementById('roomModal');
+            
+            if (e.target === bookingModal) {
+                closeBookingModal();
+            }
+            if (e.target === roomModal) {
+                closeModal();
+            }
+        });
 
         // Close modal when clicking outside
         window.addEventListener('click', function(e) {
@@ -1361,6 +1681,65 @@
         document.querySelectorAll('.room-card').forEach(card => {
             observer.observe(card);
         });
+
+        // Set minimum date for check-in to today's date
+        function setMinDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const todayFormatted = `${year}-${month}-${day}`;
+            
+            const checkinInput = document.getElementById('checkin');
+            if (checkinInput) {
+                checkinInput.min = todayFormatted;
+            }
+        }
+
+        // Set minimum date when page loads
+        document.addEventListener('DOMContentLoaded', setMinDate);
+
+        // Image cycling for Senator Suite
+        const senatorSuiteImages = [
+            'image/senator1.png',
+            'image/senator2.png',
+            'image/senator4.png'
+        ];
+
+        let currentSenatorImageIndex = 0;
+        const senatorSuiteElement = document.querySelector('.room-image.senator-suite');
+
+        function cycleSenatorSuiteImages() {
+            if (senatorSuiteElement) {
+                senatorSuiteElement.style.backgroundImage = `url('${senatorSuiteImages[currentSenatorImageIndex]}')`;
+                currentSenatorImageIndex = (currentSenatorImageIndex + 1) % senatorSuiteImages.length;
+            }
+        }
+
+        // Image cycling for Royal Suite
+        const royalSuiteImages = [
+            'image/royalsuite3.png',
+            'image/royalsuite4.png',
+            'image/royalsuite1.png'
+        ];
+
+        let currentRoyalImageIndex = 0;
+        const royalSuiteElement = document.querySelector('.room-image.royal-suite');
+
+        function cycleRoyalSuiteImages() {
+            if (royalSuiteElement) {
+                royalSuiteElement.style.backgroundImage = `url('${royalSuiteImages[currentRoyalImageIndex]}')`;
+                currentRoyalImageIndex = (currentRoyalImageIndex + 1) % royalSuiteImages.length;
+            }
+        }
+
+        // Start cycling images every 3 seconds
+        setInterval(cycleSenatorSuiteImages, 3000);
+        setInterval(cycleRoyalSuiteImages, 3000);
+
+        // Set initial images
+        cycleSenatorSuiteImages();
+        cycleRoyalSuiteImages();
     </script>
 </body>
 </html>
